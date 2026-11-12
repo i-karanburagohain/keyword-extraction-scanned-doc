@@ -13,7 +13,7 @@ It compares two keyword extraction techniques:
 
 Both techniques are evaluated against hand-labelled ground-truth keywords, and an interactive Gradio web interface lets anyone upload a notice and see its keywords.
 
-![Pipeline block diagram](pipeline_block_diagram.png)
+![Pipeline block diagram](https://raw.githubusercontent.com/i-karanburagohain/keyword-extraction-scanned-doc/main/docs/pipeline_block_diagram.png)
 
 ## Objectives
 
@@ -36,7 +36,7 @@ Mean over 12 notices:
 
 **Key finding:** in the first run, KeyBERT's top phrases were the letterhead (*eastern institute*, *bhubaneswar odisha*), because the letterhead appears on every notice. Removing lines that appear in at least 50% of notices (fuzzy-matched at 85% to catch OCR errors) and adding MMR more than doubled KeyBERT's F1. TF-IDF is more precise; KeyBERT finds more of the true keywords and returns readable phrases.
 
-![F1 by category](f1_by_category.png)
+![F1 by category](https://raw.githubusercontent.com/i-karanburagohain/keyword-extraction-scanned-doc/main/docs/f1_by_category.png)
 
 | Category | KeyBERT (baseline) | KeyBERT (final) | TF-IDF |
 |---|---|---|---|
@@ -76,7 +76,7 @@ No model is trained: all models are used pretrained.
 
 ## Dataset
 
-12 scanned academic notices in the repository root (`notice1.jpg` … `notice12.jpg`), 3 in each of 4 categories:
+12 scanned academic notices in [`data/notices/`](data/notices), 3 in each of 4 categories:
 
 | Category | Examples |
 |---|---|
@@ -85,7 +85,7 @@ No model is trained: all models are used pretrained.
 | Holiday | Christmas, winter, Guru Nanak Jayanti |
 | Event | tech fest, guest lecture, sports meet |
 
-Ground truth: [`ground_truth_keywords.xlsx`](ground_truth_keywords.xlsx), with 6–7 hand-labelled keywords per notice.
+Ground truth: [`data/ground_truth_keywords.xlsx`](data/ground_truth_keywords.xlsx), with 6–7 hand-labelled keywords per notice.
 
 | Column | Description |
 |---|---|
@@ -105,7 +105,7 @@ The notebook also accepts the column aliases `file name` and `keywords`.
 | TF-IDF | examination, hall, hall ticket, timetable, ticket, end, end semester, portal, tech, november |
 | KeyBERT | examination timetable, semester examinations, examination hall, timetable available, end semester, november examination, examination section, examinations tech, college portal, tech programmes |
 
-![Gradio demo – exam notice](demo_screenshot.png)
+![Gradio demo – exam notice](https://raw.githubusercontent.com/i-karanburagohain/keyword-extraction-scanned-doc/main/docs/demo_screenshot.png)
 
 **Input:** `notice10.jpg` (TechNova 2026 – Annual Technical Fest)
 
@@ -117,13 +117,13 @@ The notebook also accepts the column aliases `file name` and `keywords`.
 
 KeyBERT repeats the dominant word (*technova* in 5 of 10 phrases); TF-IDF gives 9 of its 10 terms the same score (0.113), so their order is arbitrary.
 
-![Gradio demo – event notice](demo_screenshot_event.png)
+![Gradio demo – event notice](https://raw.githubusercontent.com/i-karanburagohain/keyword-extraction-scanned-doc/main/docs/demo_screenshot_event.png)
 
-More examples: [`Input-Output Results.pdf`](Input-Output%20Results.pdf) and [`keywords.csv`](keywords.csv).
+More examples: [`Input-Output Results.pdf`](Input-Output%20Results.pdf) and [`outputs/keywords.csv`](outputs/keywords.csv).
 
 ## Generated Outputs
 
-Saved in the repository root:
+Saved in [`outputs/`](outputs):
 
 - `keywords.csv` – Final TF-IDF and KeyBERT keywords per notice.
 - `baseline_keywords.csv` – First run, before letterhead removal.
@@ -135,7 +135,7 @@ Saved in the repository root:
 
 1. Open [`MLLP_Project_Code.ipynb`](MLLP_Project_Code.ipynb) in [Google Colab](https://colab.research.google.com) (File → Upload notebook, or open it from GitHub).
 2. Click **Runtime → Run all**. The first cell installs the dependencies and Tesseract OCR.
-3. When the upload box appears, select **all 12 images (`notice1.jpg` … `notice12.jpg`) and `ground_truth_keywords.xlsx` together**.
+3. When the upload box appears, select **all 12 images from `data/notices/` and `data/ground_truth_keywords.xlsx` together**.
 4. The notebook prints the OCR text, keywords and evaluation tables, and downloads the output files.
 5. The last cell starts the Gradio demo and prints a public `gradio.live` link. Upload any notice to see its keywords.
 
@@ -155,10 +155,11 @@ sudo apt-get install tesseract-ocr     # Linux; on Windows install Tesseract and
 ├── MLLP_Mini-Project_Report.pdf     # project report
 ├── MLLP_PPT_Presentation.pptx       # presentation slides
 ├── Input-Output Results.pdf         # sample inputs and outputs
-├── notice1.jpg … notice12.jpg       # 12 scanned notices (dataset)
-├── ground_truth_keywords.xlsx       # hand-labelled keywords
-├── keywords.csv, baseline_keywords.csv, evaluation_results.csv, evaluation_summary.csv
-└── pipeline_block_diagram.png, f1_by_category.png, demo_screenshot*.png
+├── data/
+│   ├── notices/                     # notice1.jpg … notice12.jpg
+│   └── ground_truth_keywords.xlsx
+├── outputs/                         # keywords and evaluation CSVs, F1 chart
+└── docs/                            # block diagram, F1 chart, demo screenshots
 ```
 
 ## Limitations
@@ -180,13 +181,13 @@ sudo apt-get install tesseract-ocr     # Linux; on Windows install Tesseract and
 
 ## Presentation and Demo Video
 
-▶️ [Watch the video](ADD_VIDEO_LINK_HERE)
+▶️ [Watch the video](https://drive.google.com/file/d/1IqWBYf7Wyr79DL2a1_Tb96jweYh3c1wC/view?usp=sharing)
 
 ## Group Members and Contributions
 
 | Name | Roll Number | Contribution |
 |---|---|---|
-| Karan Burgohain | 2304024 | Coding, Implementation |
+| Karan Buragohain | 2304024 | Coding, Implementation |
 | Bikash Pradhan | 2304020 | Dataset, Report |
 | Ayushmaan Nath | 2304019 | PPT, Presentation |
 
