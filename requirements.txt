@@ -1,0 +1,10 @@
+opencv-python-headless
+pytesseract
+scikit-learn
+keybert
+sentence-transformers
+pandas
+openpyxl
+matplotlib
+gradio
+# system package: tesseract-ocr (apt-get install tesseract-ocr)
